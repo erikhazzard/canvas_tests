@@ -18,3 +18,6 @@ body, html {
     text-shadow: 1px 1px 1px #ffffff;
     top:0;
 }
+
+#canvas_element {
+}
