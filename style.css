@@ -1,0 +1,20 @@
+/* ========================================================================
+ * Canvas Tests css file
+ *
+ * ------------------------
+ *
+ * Bas overrides
+ *
+ * ======================================================================== */
+body, html {
+    background: #f7f7f7;
+    bottom:0;
+    color:##2B373D;
+    font-family: 'arial', sans-serif;
+    left:0;
+    margin:0;
+    padding:0;
+    right:0;
+    text-shadow: 1px 1px 1px #ffffff;
+    top:0;
+}
