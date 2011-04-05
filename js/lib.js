@@ -24,13 +24,19 @@ function setup_canvas_app_object(canvas_element, canvas_objects){
     CANVAS_APP['context'] = document.getElementById(canvas_element).getContext('2d');
     CANVAS_APP['width'] = document.getElementById(canvas_element).width;
     CANVAS_APP['height'] = document.getElementById(canvas_element).height;
+    CANVAS_APP['keys_pressed'] = {
+        'down': false,
+        'left': false,
+        'right': false,
+        'up': false
+    };
 
     //Additional config.  If no objects were passed in, create some
     if(canvas_objects === undefined){
         CANVAS_APP['canvas_objects'] = {
             'circle': {
                 'x': 20,
-                'y': 20,
+                'y': 200,
                 'dx': 2,
                 'dy': 2,
             },
@@ -39,6 +45,12 @@ function setup_canvas_app_object(canvas_element, canvas_objects){
                 'width': 75,
                 'x': CANVAS_APP.width / 2,
                 'y': CANVAS_APP.height - 10
+            },
+            'bricks': {
+                'height': 0,
+                'objects': undefined,
+                'padding': 1,
+                'width': 0
             }
         };
     } else{
