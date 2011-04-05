@@ -47,9 +47,11 @@ function setup_canvas_app_object(canvas_element, canvas_objects){
                 'y': CANVAS_APP.height - 10
             },
             'bricks': {
+                'columns': 0,
                 'height': 0,
                 'objects': undefined,
                 'padding': 1,
+                'rows': 0,
                 'width': 0
             }
         };

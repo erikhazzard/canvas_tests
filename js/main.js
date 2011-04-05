@@ -109,14 +109,47 @@ function draw(){
     //Check to see if ball hit a brick
     //  If the ball's y is less than or equal to the height of all the
     //  brick objects combined
-    if( y < ((bricks.height + bricks.padding) * bricks.rows)){
+    if( (y>0) &&
+        y < ((bricks.height + bricks.padding) * bricks.rows)){
         //Now we can start checking to see what col / row the ball is in    
+        //  Check first for the ball's Y position
         cur_row = Math.floor(y/(bricks.padding + bricks.height));
         cur_col = Math.floor(x/(bricks.padding + bricks.width));
-        if(bricks.objects[cur_row][cur_col] === 1 &&
-            cur_row >= 0 && cur_col >= 0){
+        //  And again for it's y+width position, to see if we hit multiple
+        //  bricks
+        cur_row_width = Math.floor(
+            (y+radius)/(
+            bricks.padding + bricks.height));
+        cur_col_width = Math.floor(
+            (x+radius)/(
+            bricks.padding + bricks.width));
+
+        //Make sure that the current col and row from the y/x+radius actually
+        //  exists
+        if(cur_row_width >= bricks.rows){
+            cur_row_width -= 1;
+        }
+        if(cur_col_width >= bricks.colums){
+            cur_col_width -= 1;
+        }
+
+        //Keep track if we should reverse the direction
+        var reverse_direction = false;
+        if(cur_row >= 0 && cur_col >= 0 &&
+                bricks.objects[cur_row][cur_col] === 1){
             //Break the current brick
             CANVAS_APP.canvas_objects.bricks.objects[cur_row][cur_col] = 0;
+            //We hit a brick, so reverse the direction after these checks
+            reverse_direction = true;
+        }
+        if(cur_row_width >= 0 && cur_col_width >= 0
+            && bricks.objects[cur_row_width][cur_col_width] === 1){
+            //Break the current brick
+            CANVAS_APP.canvas_objects.bricks.objects[cur_row_width][cur_col_width] = 0;
+            //We hit a brick, so reverse the direction after these checks
+            reverse_direction = true;
+        }
+        if(reverse_direction === true){
             //Reverse the ball
             CANVAS_APP.canvas_objects.circle.dy = -dy;
         }
@@ -181,11 +214,11 @@ function init(){
     setup_canvas_app_object('canvas_element');
 
     //Create bricks
-    create_brick_objects(10,5);
+    create_brick_objects(5,1);
 
     //Setup user input
     setup_key_events();
-    setInterval(draw, 10);
+    setInterval(draw, 1);
 }
 
 // ===========================================================================
