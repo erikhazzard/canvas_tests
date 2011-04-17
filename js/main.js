@@ -164,9 +164,16 @@ function draw(){
         if(x>CANVAS_APP.canvas_objects.pad.x &&
             x<CANVAS_APP.canvas_objects.pad.x
             +CANVAS_APP.canvas_objects.pad.width){
+            //Ball hit the paddle
             $('canvas_element').highlight();
             $('game_log').set('html', $('game_log').get('html')
                 + '| ');
+            CANVAS_APP.canvas_objects.circle.dx = 8 * (
+                (x-(
+                CANVAS_APP.canvas_objects.pad.x
+                + CANVAS_APP.canvas_objects.pad.width/2))
+                / CANVAS_APP.canvas_objects.pad.width
+            );
         }
         //Update dy
         CANVAS_APP.canvas_objects.circle.dy = -dy;
